@@ -1,13 +1,14 @@
-name: Monitor App Versions
+name: App Update Notifier
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # This runs every 5 minutes
-  workflow_dispatch:  # This allows manual triggering of the workflow
+    - cron: '*/10 * * * *'  # Every 5 minutes
+  workflow_dispatch:       # Manual trigger option
 
 jobs:
-  update_app_versions:
+  run-script:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,23 +23,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Configure Git user
-        run: |
-          git config --global user.email "mbggan@gmail.com"  # Replace with your email
-          git config --global user.name "mbggan"  # Replace with your name
-
-      - name: Run script to check for updates
-        run: |
-          python main.py
+      - name: Run Python script
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python main.py
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Commit and push changes to app_versions.json
         run: |
           git add app_versions.json
-          git commit -m "Update app_versions.json with new app versions"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git commit -m "Update app_versions.json with new app versions" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} HEAD:main
