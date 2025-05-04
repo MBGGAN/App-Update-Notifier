@@ -34,8 +34,8 @@ To use this project, you’ll need:
 ### 1. 💾 Fork or clone the repository
 
 ```bash
-git clone https://github.com/your-username/app-update-notifier.git
-cd app-update-notifier
+git clone https://github.com/MBGGAN/App-Update-Notifier.git
+cd App-Update-Notifier
 ```
 
 ---
