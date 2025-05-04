@@ -2,8 +2,8 @@ name: App Update Notifier
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # Every 5 minutes
-  workflow_dispatch:       # Manual trigger option
+    - cron: '*/10 * * * *'  # Every 10 minutes
+  workflow_dispatch:  # Manual trigger option
 
 jobs:
   run-script:
@@ -40,4 +40,3 @@ jobs:
           git add app_versions.json
           git commit -m "Update app_versions.json with new app versions" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }} HEAD:main
-
