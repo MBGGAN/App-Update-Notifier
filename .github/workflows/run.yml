@@ -39,8 +39,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "mbggan"
-          git config user.email "mbggan@gmail.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Commit and push changes to app_versions.json
         run: |
