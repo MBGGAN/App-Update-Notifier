@@ -2,7 +2,7 @@ name: Monitor App Versions
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # This runs every 5 minutes
+    - cron: "*/10 * * * *"  # This runs every 5 minutes
   workflow_dispatch:  # This allows manual triggering of the workflow
 
 jobs:
@@ -24,8 +24,8 @@ jobs:
 
       - name: Configure Git user
         run: |
-          git config --global user.email "${{ secrets.GITHUB_EMAIL }}"
-          git config --global user.name "${{ secrets.GITHUB_USERNAME }}"
+          git config --global user.email "mbggan@gmail.com"  # Replace with your email
+          git config --global user.name "mbggan"  # Replace with your name
 
       - name: Run script to check for updates
         run: |
