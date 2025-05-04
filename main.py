@@ -21,7 +21,12 @@ def load_last_notified_versions():
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r") as f:
             return json.load(f)
-    return {}
+    else:
+        # Create the file with an empty dictionary if it doesn't exist
+        with open(DATA_FILE, "w") as f:
+            json.dump({}, f)
+        print(f"{DATA_FILE} created with an empty dictionary.")
+        return {}
 
 def save_last_notified_versions(data):
     with open(DATA_FILE, "w") as f:
