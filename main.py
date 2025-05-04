@@ -12,7 +12,6 @@ DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 apps_to_monitor = {
     "Minecraft PE": "com.mojang.minecraftpe",
     "Lunar Client": "localhost.lunar",
-    "ToolBox": "io.mrarm.mctoolbox",
 }
 
 PLAY_STORE_URL = "https://play.google.com/store/apps/details?id={}"
